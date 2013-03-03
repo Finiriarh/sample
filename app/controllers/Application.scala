@@ -8,7 +8,7 @@ import models.Task
 object Application extends Controller {
 
   def index = Action {
-    Redirect(routes.Application.tasks)
+    Redirect(routes.Application.tasks())
   }
 
   val taskForm = Form(
@@ -24,13 +24,13 @@ object Application extends Controller {
       errors => BadRequest(views.html.tasks(Task.all, errors)),
       label => {
         Task.create(label)
-        Redirect(routes.Application.tasks)
+        Redirect(routes.Application.tasks())
       }
     )
   }
 
   def deleteTask(id: Long) = Action{
     Task.delete(id)
-    Redirect(routes.Application.tasks)
+    Redirect(routes.Application.tasks())
   }
 }
